@@ -31,13 +31,13 @@ const steps: {
 
 const WhoWeAre = () => {
   return (
-    <div className="mt-8">
-      {/* <Strip>
-        <Title className="">How it works</Title>
-      </Strip> */}
-      <div className="flex justify-center">
+    <div className="">
+      <Strip>
+        <Title className="text-center">How it works</Title>
+      </Strip>
+      {/* <div className="flex justify-center">
         <Title className="text-black">How it works</Title>
-      </div>
+      </div> */}
 
       <Body className="mt-14">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
