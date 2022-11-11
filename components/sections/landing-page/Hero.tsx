@@ -1,9 +1,10 @@
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Body from "../../elements/Body";
 import Button from "../../elements/Button";
 import Heading from "../../elements/Heading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 const Hero = () => {
   return (
     <div className="bg-[url('/images/hero.jpeg')] bg-no-repeat bg-cover w-full md:h-[100vh] h-[100vh] relative ">
