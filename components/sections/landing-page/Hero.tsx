@@ -16,7 +16,7 @@ const Hero = () => {
             Home Munch is a food marketplace for for hungry students ,
             professionals who want healthy delicious home cooked meals.
           </p>
-          <div className="w-full flex justify-center absolute bottom-8  right-0 left-0 ">
+          <div className="w-full flex justify-center absolute md:bottom-8 bottom-20  right-0 left-0 ">
             <div className="flex flex-col items-center">
               <span className="text-gray-400">
                 Scroll down to see how it works
