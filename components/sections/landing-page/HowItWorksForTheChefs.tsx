@@ -10,30 +10,30 @@ const steps: {
   title: string;
 }[] = [
   {
-    title: "Explore",
-    image: "/images/browse.png",
+    title: "Your Dishes, Your Prices",
+    image: "/images/cooking.png",
     description:
-      "Browse through all home cooked meals made by local chefs around your area by simply putting in your postcode.",
+      "Become your own boss and earn money from your own kitchen. Cook what you want and let the food to do the talking.",
   },
   {
-    title: "Order",
-    image: "/images/cart.png",
+    title: "Easy, Curbside Pickups",
+    image: "/images/easy-to-use.png",
     description:
-      "Add your home cooked meal to the Munch cart chose if you want it delivered or collection.",
+      "Easy to to use platform. Cook, share your menu and get orders.",
   },
   {
-    title: "Enjoy",
-    image: "/images/enjoy.png",
+    title: "Set Your Own Schedule",
+    image: "/images/schedule.png",
     description:
-      "Enjoy fresh delicious home cooked food and leave a review for the chef",
+      "You set your own menu, days you want to cook, and the price of your dishes.",
   },
 ];
 
-const WhoWeAre = () => {
+const HowItWorksForTheChefs = () => {
   return (
-    <div className="md:h-[100vh]">
+    <div className="mt-14 h-[100vh]">
       <Strip>
-        <Title className="text-center">How it works</Title>
+        <Title className="text-center">How it works for Chefs</Title>
       </Strip>
       {/* <div className="flex justify-center">
         <Title className="text-black">How it works</Title>
@@ -50,4 +50,4 @@ const WhoWeAre = () => {
   );
 };
 
-export default WhoWeAre;
+export default HowItWorksForTheChefs;

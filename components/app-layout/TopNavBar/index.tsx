@@ -6,7 +6,7 @@ import Body from "../../elements/Body";
 
 const TopNavBar = () => {
   return (
-    <div className="h-[12vh]  w-screen  py-4 fixed z-10 ">
+    <div className="h-[12vh]  w-screen  py-4 absolute z-10  right-0  ">
       <Body className="flex justify-between items-center">
         <div className="md:h-[6rem] md:w-[6rem] w-[4rem] h-[4rem] ">
           <img src="/logo.jpeg" alt="logo" className="rounded-full " />

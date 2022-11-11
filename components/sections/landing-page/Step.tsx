@@ -19,7 +19,7 @@ const Step = ({ step }: StepProps) => {
             className="rounded-t-lg  aspect-square "
           />
         </div>
-        <div className="font-bold text-lg">{step.title}</div>
+        <div className="font-bold text-lg mt-3">{step.title}</div>
         <p className="mt-6 px-4 ">{step.description}</p>
       </div>
     </div>

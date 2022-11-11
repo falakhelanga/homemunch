@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         hmRed: "#FF1616",
-        hmYellow: "#FBDD57",
+        hmYellow: "#FDE056",
       },
     },
   },
