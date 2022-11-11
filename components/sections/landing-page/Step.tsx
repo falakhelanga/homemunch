@@ -20,7 +20,7 @@ const Step = ({ step }: StepProps) => {
           />
         </div>
         <div className="font-bold text-lg mt-3">{step.title}</div>
-        <p className="mt-6 px-4 ">{step.description}</p>
+        <p className="mt-6 px-4 md:text-lg ">{step.description}</p>
       </div>
     </div>
   );
