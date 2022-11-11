@@ -27,10 +27,14 @@ const steps: {
 
 const WhoWeAre = () => {
   return (
-    <div className="">
-      <Strip>
+    <div className="mt-8">
+      {/* <Strip>
         <Title className="">How it works</Title>
-      </Strip>
+      </Strip> */}
+      <div className="flex justify-center">
+        <Title className="text-black">How it works</Title>
+      </div>
+
       <Body className="mt-14">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
           {steps.map((step, idx) => {
