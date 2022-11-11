@@ -1,0 +1,28 @@
+import React from "react";
+
+interface StepProps {
+  step: {
+    image: string;
+    description: string;
+  };
+}
+
+const Step = ({ step }: StepProps) => {
+  return (
+    <div className=" pb-4">
+      <div className="rounded-t-md  ">
+        <div>
+          <img
+            src={step?.image}
+            alt={step.description}
+            className="rounded-t-lg  aspect-square "
+          />
+        </div>
+
+        <p className="mt-6 px-4">{step.description}</p>
+      </div>
+    </div>
+  );
+};
+
+export default Step;
