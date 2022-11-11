@@ -7,18 +7,22 @@ import Step from "./Step";
 const steps: {
   image: string;
   description: string;
+  title: string;
 }[] = [
   {
+    title: "Explore",
     image: "/images/browse.png",
     description:
       "Browse through all home cooked meals made by local chefs around your area by simply putting in your postcode.",
   },
   {
+    title: "Order",
     image: "/images/cart.png",
     description:
       "Add your home cooked meal to the Munch cart chose if you want it delivered or collection.",
   },
   {
+    title: "Enjoy",
     image: "/images/enjoy.png",
     description:
       "Enjoy fresh delicious home cooked food and leave a review for the chef",

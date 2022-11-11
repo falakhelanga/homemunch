@@ -4,12 +4,13 @@ interface StepProps {
   step: {
     image: string;
     description: string;
+    title: string;
   };
 }
 
 const Step = ({ step }: StepProps) => {
   return (
-    <div className=" pb-4">
+    <div className=" pb-4 text-center">
       <div className="rounded-t-md  ">
         <div>
           <img
@@ -18,8 +19,8 @@ const Step = ({ step }: StepProps) => {
             className="rounded-t-lg  aspect-square "
           />
         </div>
-
-        <p className="mt-6 px-4">{step.description}</p>
+        <div className="font-bold text-lg">{step.title}</div>
+        <p className="mt-6 px-4 ">{step.description}</p>
       </div>
     </div>
   );
