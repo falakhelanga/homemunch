@@ -7,7 +7,9 @@ const FireBaseContext: Context<FireBaseTypes | null> =
 
 const FireBaseProvider = ({ children }: { children: ReactNode }) => {
   return (
-    <FireBaseContext.Provider value={functions}></FireBaseContext.Provider>
+    <FireBaseContext.Provider value={functions}>
+      {children}
+    </FireBaseContext.Provider>
   );
 };
 
