@@ -1,11 +1,15 @@
 import React from "react";
+import Footer from "./Footer";
 import TopNavBar from "./TopNavBar";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="">
+    <div className="relative h-full">
       <TopNavBar />
-      <main className="">{children}</main>
+      <main className=" ">
+        <div>{children}</div>
+        <Footer />
+      </main>
     </div>
   );
 };

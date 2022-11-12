@@ -31,7 +31,7 @@ const steps: {
 
 const HowItWorksForTheChefs = () => {
   return (
-    <div className="mt-14 h-[100vh]">
+    <div className="">
       <Strip>
         <Title className="text-center">How it works for Chefs</Title>
       </Strip>
@@ -39,7 +39,7 @@ const HowItWorksForTheChefs = () => {
         <Title className="text-black">How it works</Title>
       </div> */}
 
-      <Body className="  md:h-full flex items-center">
+      <Body className="   h-full flex items-center my-16 md:my-[10rem]">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
           {steps.map((step, idx) => {
             return <Step key={idx} step={step} />;
