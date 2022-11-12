@@ -21,7 +21,7 @@ const EntryForm = () => {
             <Title>We are coming soon</Title>
             <p className="text-white mt-6 ">
               {
-                "Leave your email adress and your phone number, and we'll let you know when we launch"
+                "Leave your email adress and your phone number, and we'll let you know when we launch "
               }
             </p>
           </div>
