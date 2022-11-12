@@ -18,8 +18,7 @@ const steps: {
   {
     title: "Easy, Curbside Pickups",
     image: "/images/easy-to-use.png",
-    description:
-      "Easy to to use platform. Cook, share your menu and get orders.",
+    description: "Easy to use platform. Cook, share your menu and get orders.",
   },
   {
     title: "Set Your Own Schedule",
