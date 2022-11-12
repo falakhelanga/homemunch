@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useFireBase } from "../../../context/firebase";
 import Body from "../../elements/Body";
 import Button from "../../elements/Button";
 import Form from "../../elements/Form";
@@ -6,6 +7,7 @@ import TextInput from "../../elements/TextInput";
 import Title from "../../elements/Title";
 
 const EntryForm = () => {
+  // const {add} = useFireBase()
   const initialValues = useMemo(() => {
     return {
       name: "",
@@ -18,8 +20,9 @@ const EntryForm = () => {
           <div className="mb-16 text-center">
             <Title>We are coming soon</Title>
             <p className="text-white mt-6 ">
-              Leave your email adress and your phone number, and we'll let you
-              know when we launch
+              {
+                "Leave your email adress and your phone number, and we'll let you know when we launch"
+              }
             </p>
           </div>
 
