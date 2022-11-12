@@ -1,9 +1,13 @@
 import React from "react";
-import { Formik, Form as FormiKForm } from "formik";
+import { Formik, Form as FormiKForm, FormikHelpers } from "formik";
 
 interface FormPropsType {
   initialValues: any;
-  onSubmit: any;
+  onSubmit: ((
+    values: any,
+    formikHelpers: FormikHelpers<any>
+  ) => void | Promise<any>) &
+    ((values: any) => void);
   children: React.ReactNode;
   className?: string;
 }

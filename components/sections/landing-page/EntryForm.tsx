@@ -1,18 +1,39 @@
-import React, { useMemo } from "react";
+import { FormikHelpers } from "formik";
+import React, { useMemo, useState } from "react";
 import { useFireBase } from "../../../context/firebase";
 import Body from "../../elements/Body";
 import Button from "../../elements/Button";
 import Form from "../../elements/Form";
 import TextInput from "../../elements/TextInput";
 import Title from "../../elements/Title";
-
+import { toast } from "react-toastify";
 const EntryForm = () => {
-  // const {add} = useFireBase()
+  const { addEntry } = useFireBase();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const initialValues = useMemo(() => {
     return {
       name: "",
+      phoneNumber: "",
+      email: "",
     };
   }, []);
+  const handleSubmit = async (
+    values: any,
+    formikHelpers: FormikHelpers<any>
+  ) => {
+    setIsSubmitting(true);
+    try {
+      addEntry(values);
+      toast.success(
+        "We saved you details to our records, we will notify you when we launch"
+      );
+    } catch (error) {
+      toast.error("Oops something went wrong");
+      console.log(error, "error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="w-full flex justify-center bg-[url(/images/food-bg.jpg)] bg-no-repeat bg-cover bg-center h-screen items-center  ">
       <div className="h-full w-full bg-[rgba(0,0,0,0.3)] py-28">
@@ -29,9 +50,7 @@ const EntryForm = () => {
           <Form
             className="w-full md:w-1/2 w-full "
             initialValues={initialValues}
-            onSubmit={() => {
-              console.log("submit");
-            }}
+            onSubmit={handleSubmit as any}
           >
             <TextInput
               labelClassNames="text-white"
@@ -59,7 +78,7 @@ const EntryForm = () => {
             />
 
             <Button className="mt-6 text-white" type="submit">
-              Notify me
+              {isSubmitting ? "Submitting..." : "Notify me"}
             </Button>
           </Form>
         </Body>

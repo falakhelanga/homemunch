@@ -2,8 +2,7 @@ import { Context, createContext, ReactNode, useContext } from "react";
 import { FireBaseTypes } from "../../types/firebaseTypes";
 
 import { functions } from "./functions";
-const FireBaseContext: Context<FireBaseTypes | null> =
-  createContext<FireBaseTypes | null>(null);
+const FireBaseContext = createContext<FireBaseTypes | null>(null);
 
 const FireBaseProvider = ({ children }: { children: ReactNode }) => {
   return (
@@ -14,4 +13,4 @@ const FireBaseProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export default FireBaseProvider;
-export const useFireBase = () => useContext(FireBaseContext);
+export const useFireBase = () => useContext(FireBaseContext) as FireBaseTypes;
