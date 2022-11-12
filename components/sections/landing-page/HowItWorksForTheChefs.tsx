@@ -39,7 +39,7 @@ const HowItWorksForTheChefs = () => {
         <Title className="text-black">How it works</Title>
       </div> */}
 
-      <Body className="  h-full flex items-center">
+      <Body className="  md:h-full flex items-center">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
           {steps.map((step, idx) => {
             return <Step key={idx} step={step} />;
