@@ -1,4 +1,5 @@
 import React from "react";
+import EntryForm from "./EntryForm";
 import Hero from "./Hero";
 import HowItWorks from "./HowItWorks";
 import HowItWorksForTheChefs from "./HowItWorksForTheChefs";
@@ -9,6 +10,7 @@ const LandingPage = () => {
       <Hero />
       <HowItWorks />
       <HowItWorksForTheChefs />
+      <EntryForm />
     </div>
   );
 };
