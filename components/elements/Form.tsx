@@ -10,6 +10,8 @@ interface FormPropsType {
     ((values: any) => void);
   children: React.ReactNode;
   className?: string;
+  formClassName?: string;
+  validationSchema?: any;
 }
 
 const Form = ({
@@ -17,12 +19,19 @@ const Form = ({
   onSubmit,
   children,
   className,
+  formClassName,
+  validationSchema,
   ...rest
 }: FormPropsType) => {
   return (
     <div className={`${className}`}>
-      <Formik {...rest} onSubmit={onSubmit} initialValues={initialValues}>
-        <FormiKForm>{children}</FormiKForm>
+      <Formik
+        validationSchema={validationSchema}
+        {...rest}
+        onSubmit={onSubmit}
+        initialValues={initialValues}
+      >
+        <FormiKForm className={formClassName}>{children}</FormiKForm>
       </Formik>
     </div>
   );

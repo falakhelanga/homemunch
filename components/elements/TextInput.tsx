@@ -4,7 +4,7 @@ import InputWrapper from "./InputWrapper";
 
 interface TextInputPropType {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   containerClassNames?: string;
   inputClassNames?: string;
@@ -19,6 +19,7 @@ const TextInput = ({
   inputClassNames,
   containerClassNames,
   labelClassNames,
+
   type = "text",
 }: TextInputPropType) => {
   return (
@@ -38,7 +39,9 @@ const TextInput = ({
               placeholder={placeholder}
             />
             {meta.touched && meta.error && (
-              <div className="error">{meta.error}</div>
+              <div className="text-red-600 text-sm p-2  bg-opacity-10">
+                {meta.error}
+              </div>
             )}
           </div>
         )}

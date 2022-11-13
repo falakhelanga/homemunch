@@ -48,7 +48,7 @@ const EntryForm = () => {
           </div>
 
           <Form
-            className="w-full md:w-1/2 w-full "
+            className="w-full md:w-1/2 w-full  "
             initialValues={initialValues}
             onSubmit={handleSubmit as any}
           >

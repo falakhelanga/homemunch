@@ -13,8 +13,8 @@ const Hero = () => {
           <Heading className="md:mt-2">What is</Heading>
           <Heading className="mt-1">home munch</Heading>
           <p className="md:text-xl text-md  mt-12 w-[80%] ">
-            Home Munch is a food marketplace for for hungry students ,
-            professionals who want healthy delicious home cooked meals.
+            Home Munch is a food marketplace for hungry students, professionals
+            who want healthy delicious home cooked meals.
           </p>
           <div className="w-full flex justify-center absolute md:bottom-8 bottom-20  right-0 left-0 ">
             <div className="flex flex-col items-center">
