@@ -11,7 +11,7 @@ const Hero = () => {
       <div className="text-white h-full w-full bg-[rgba(0,0,0,0.6)] flex  justify-center flex-col ">
         <Body>
           <Heading className="md:mt-2">What is</Heading>
-          <Heading className="mt-1">home munch</Heading>
+          <Heading className="mt-1">Home Munch</Heading>
           <p className="md:text-xl text-md  mt-12 w-[80%] ">
             Home Munch is a food marketplace for hungry students, professionals
             who want healthy delicious home cooked meals.
