@@ -13,12 +13,12 @@ const TopNavBar = () => {
           <img src="/logo.jpeg" alt="logo" className="rounded-full " />
         </Link>
         <div className="flex gap-3 items-center ">
-          {/* <Link
+          <Link
             href="/auth/chef/signup"
             className="font-bold border py-2 border-hmYellow rounded-md px-2 md:hover:bg-hmYellow md:hover:text-black flex items-center mr-6 "
           >
             <span>Cook with us</span> <GiCook size={23} />
-          </Link> */}
+          </Link>
 
           <FontAwesomeIcon
             icon={faBars}
