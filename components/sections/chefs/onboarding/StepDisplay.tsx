@@ -23,7 +23,7 @@ const StepDisplay = ({
         } ${
           isLast
             ? "after:w-[0rem] after:left-0 after:content-['']"
-            : "after:w-[20rem] after:left-[3.9rem] after:absolute after:content-[' ']  "
+            : "after:w-[25rem] after:left-[3.9rem] after:absolute after:content-[' ']  "
         } `}
       >
         <span className="z-[4] relative">

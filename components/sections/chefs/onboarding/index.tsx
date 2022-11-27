@@ -41,7 +41,6 @@ const Onboarding = () => {
   const [activeStep, setActiveStep] = useState(1);
   const [currStep, setCurrStep] = useState(1);
   const nextStep = () => {
-    if (currStep === steps.length) return;
     setCurrStep((currStep) => currStep + 1);
   };
   const title = useMemo(() => {

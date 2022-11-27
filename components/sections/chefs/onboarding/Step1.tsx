@@ -6,7 +6,7 @@ import ErrorBlock from "../../../elements/ErrorBlock";
 import Form from "../../../elements/Form";
 import PhoneInput from "../../../elements/PhoneInput";
 import TextInput from "../../../elements/TextInput";
-import { chefSignUoValidationSchema } from "../../auth/chef/signup/validationSchema";
+import { chefUpdateValidationSchema } from "./validationSchame";
 
 const fields = [
   {
@@ -81,7 +81,7 @@ const Step1 = ({ nextStep }: { nextStep: () => void }) => {
   return (
     <div className="w-full ">
       <Form
-        validationSchema={chefSignUoValidationSchema}
+        validationSchema={chefUpdateValidationSchema}
         formClassName="w-full "
         initialValues={initialValues}
         onSubmit={handleSubmit}

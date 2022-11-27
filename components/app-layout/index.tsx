@@ -9,13 +9,10 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="relative h-full">
       {" "}
-      {(!router.route.includes("auth") || !router.route.includes("chefs")) && (
-        <TopNavBar />
-      )}
+      {!router.route.includes("chef") && <TopNavBar />}
       <main className=" ">
         <div>{children}</div>
-        {(!router.route.includes("auth") ||
-          !router.route.includes("chefs")) && <Footer />}
+        {!router.route.includes("chef") && <Footer />}
       </main>
     </div>
   );
