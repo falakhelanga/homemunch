@@ -19,3 +19,19 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* .step {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+.step::after {
+  position: absolute;
+
+  content: "hdhd";
+  height: 1rem;
+  width: 30rem;
+
+  background-color: blue;
+} */

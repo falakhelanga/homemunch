@@ -26,3 +26,8 @@ export const chefSignUoValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("Please confirm your password."),
 });
+
+export const foodSafetyValidation = Yup.object().shape({
+  registeredToSellFromHome: Yup.bool().oneOf([true], "This field is required "),
+  foodygieneCertificate: Yup.bool().oneOf([true], "This field is required "),
+});

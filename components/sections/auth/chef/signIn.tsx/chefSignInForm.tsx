@@ -14,109 +14,82 @@ import { useRouter } from "next/router";
 import ErrorBlock from "../../../../elements/ErrorBlock";
 import { useChefAuth } from "../../../../../context/chefs/auth";
 import Cookies from "js-cookie";
+import { doc, getDoc } from "firebase/firestore";
 
 const fields = [
-  {
-    name: "firstName",
-
-    type: "text",
-    className: "col-span-1",
-    placeholder: "Enter your name",
-  },
-  {
-    name: "lastName",
-
-    type: "text",
-    className: "col-span-1",
-    placeholder: "Enter your last name",
-  },
   {
     name: "emailAdress",
 
     type: "text",
-    className: "col-span-1 mt-2",
+    className: "col-span-2 mt-2",
     placeholder: "Enter your email Adress ",
   },
-  {
-    name: "phoneNumber",
 
-    type: "phone",
-    className: "col-span-1 mt-2",
-    placeholder: "Enter your phone number",
-  },
-  {
-    name: "homeAdress",
-
-    type: "text",
-    className: "col-span-2 mt-2",
-    placeholder: "Enter your zipcode",
-  },
   {
     name: "password",
 
     type: "password",
-    className: "col-span-1 mt-2",
+    className: "col-span-2 mt-2",
     placeholder: "Enter your password",
-  },
-  {
-    name: "confirmPassword",
-
-    type: "password",
-    className: "col-span-1 mt-2",
-    placeholder: "Confirm your password",
   },
 ];
 
-const ChefSignUpForm = () => {
+const ChefSignInForm = () => {
   const router = useRouter();
   const initialValues = useMemo(
     () => ({
-      firstName: "",
-      lastName: "",
       emailAdress: "",
-      phoneNumber: "",
-      homeAdress: "",
+
       password: "",
-      confirmPassword: "",
     }),
     []
   );
   const [loading, setLoading] = useState(false);
   const { setChefAuth } = useChefAuth();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { chefsSignUp } = useFireBase();
+  const { chefsSignIn, db } = useFireBase();
   const handleSubmit = async (values: any) => {
     setLoading(true);
     try {
-      const user = await chefsSignUp(
-        {
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.emailAdress,
-          phoneNumber: values.phoneNumber,
-          zipCode: values.homeAdress,
-        },
-        values.password
-      );
-      setChefAuth({
-        ...user,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.emailAdress,
-        phoneNumber: values.phoneNumber,
-        zipCode: values.homeAdress,
-      });
-      Cookies.set(
-        "chef",
-        JSON.stringify({
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.emailAdress,
-          phoneNumber: values.phoneNumber,
-          zipCode: values.homeAdress,
-        })
-      );
-      router.push("/chefs/onboarding");
+      const user = await chefsSignIn(values.emailAdress, values.password);
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        setChefAuth({
+          ...user,
+          ...(docSnap.data() as any),
+        });
+        Cookies.set(
+          "chef",
+          JSON.stringify({
+            ...docSnap.data(),
+          })
+        );
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+
+      // setChefAuth({
+      //   ...user,
+      //   firstName: values.firstName,
+      //   lastName: values.lastName,
+      //   email: values.emailAdress,
+      //   phoneNumber: values.phoneNumber,
+      //   zipCode: values.homeAdress,
+      // });
+      // Cookies.set(
+      //   "chef",
+      //   JSON.stringify({
+      //     firstName: values.firstName,
+      //     lastName: values.lastName,
+      //     email: values.emailAdress,
+      //     phoneNumber: values.phoneNumber,
+      //     zipCode: values.homeAdress,
+      //   })
+      // );
+      router.push("/chefs");
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {
@@ -129,7 +102,7 @@ const ChefSignUpForm = () => {
     <div className=" w-full pt-8">
       <div className="mb-8">
         <Title size="sm" className="text-center text-black">
-          Sign up with Home Munch
+          Sign in with Home Munch
         </Title>
       </div>
 
@@ -164,7 +137,7 @@ const ChefSignUpForm = () => {
 
         <div className="flex flex-col gap-4 mt-4 mx-16">
           <Button type="submit" className="font-normal" variant="outline">
-            {!loading ? " Sign Up" : "Signing Up..."}
+            {!loading ? "Sign in" : "Signing in..."}
           </Button>
           <div className="w-full flex items-center gap-4 my-6">
             <div className="flex-1 h-[1px] bg-[#d8d8d8]"></div>
@@ -176,7 +149,7 @@ const ChefSignUpForm = () => {
         </div>
         <p className="text-center mt-4">
           Already have an account?{" "}
-          <Link className="text-[#4484f3]" href={"/auth/chef/signin"}>
+          <Link className="text-[#4484f3]" href={"/auth/chef/signup"}>
             Log in
           </Link>
         </p>
@@ -185,4 +158,4 @@ const ChefSignUpForm = () => {
   );
 };
 
-export default ChefSignUpForm;
+export default ChefSignInForm;
