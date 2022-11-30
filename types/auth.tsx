@@ -4,4 +4,5 @@ export interface Chef {
   email: string;
   phoneNumber: string;
   zipCode: string;
+  isOnboarded?: boolean;
 }

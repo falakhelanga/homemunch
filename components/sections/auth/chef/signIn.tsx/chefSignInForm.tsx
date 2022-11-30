@@ -148,9 +148,9 @@ const ChefSignInForm = () => {
           <GoogleLogin isSignUp />
         </div>
         <p className="text-center mt-4">
-          Already have an account?{" "}
+          Not a member?{" "}
           <Link className="text-[#4484f3]" href={"/auth/chef/signup"}>
-            Log in
+            Sign up
           </Link>
         </p>
       </Form>

@@ -3,6 +3,7 @@ import React from "react";
 export interface MenuItemPropType {
   text: string;
   bg?: string;
+  link?: string;
 }
 
 const MenuItem = ({ text, bg }: MenuItemPropType) => {

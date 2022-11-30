@@ -1,24 +1,32 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import DisplayInfo from "./DisplayInfo";
 import MenuItem, { MenuItemPropType } from "./MenuItem";
 
 const items: MenuItemPropType[] = [
-  {
-    text: "Dashboard",
-    bg: "bg-hmYellow",
-  },
+  // {
+  //   text: "Dashboard",
+  //   bg: "bg-hmYellow",
+  //   link: "/chefs/dashboard",
+  // },
   {
     text: "Meals",
+    link: "/chefs/meals",
   },
   {
-    text: "Order",
+    text: "Orders",
+    link: "/chefs/orders",
   },
   {
     text: "Profile",
+    link: "/chefs/profile",
   },
 ];
 
 const SideMenu = () => {
+  const router = useRouter();
+
   return (
     <div className="bg-hmRed w-full h-full flex flex-col">
       <div className="flex-1 ">
@@ -29,7 +37,12 @@ const SideMenu = () => {
         </div>
 
         {items.map((item, idx) => (
-          <MenuItem text={item.text} key={idx} bg={item.bg} />
+          <Link key={idx} href={item.link!!}>
+            <MenuItem
+              text={item.text}
+              bg={item.link === router.route ? "bg-hmYellow" : ""}
+            />
+          </Link>
         ))}
       </div>
       <DisplayInfo />

@@ -44,8 +44,10 @@ export const functions = {
         console.log(user.emailVerified);
         setDoc(doc(db, "users", user.uid), {
           ...chef,
+          isOnboarded: false,
           dateCreated: Timestamp.now(),
         });
+
         console.log(user, "user");
         // Cookies.set(JSON.stringify({...user,}))
         sendEmailVerification(user);

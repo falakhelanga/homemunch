@@ -16,18 +16,29 @@ export function AuthGuard({ children }: { children: JSX.Element }) {
         // remember the page that user tried to access
         setRedirect(router.route);
         // redirect
-        router.push("/signin");
+        router.push("/auth/chef/signin");
       }
     }
   }, [initializing, chefAuth, setRedirect]);
-
+  // useEffect(() => {
+  //   console.log(chefAuth?.isOnboarded, "hsh");
+  //   if (router.route !== "/chefs/onboarding") {
+  //     if (!chefAuth?.isOnboarded) {
+  //       router.push("/chefs/onboarding");
+  //     } else {
+  //       router.push("/chefs");
+  //     }
+  //   }
+  // }, []);
   /* show loading indicator while the auth provider is still initializing */
+
   if (initializing) {
     return <h1>Application Loading</h1>;
   }
   if (chefAuth && !chefAuth?.emailVerified) {
     return <h1>Please verify your email</h1>;
   }
+
   // if auth initialized with a valid user show protected page
   if (!initializing && chefAuth && chefAuth?.emailVerified) {
     return <>{children}</>;
