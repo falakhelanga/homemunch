@@ -1,5 +1,6 @@
 import { async } from "@firebase/util";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { getAuth, onAuthStateChanged, User, signOut } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import {
@@ -11,6 +12,7 @@ import {
   useEffect,
 } from "react";
 import { Chef } from "../../../types/auth";
+import { useFireBase } from "../../firebase";
 
 interface ChefContextType {
   chefAuth: (User & Chef) | null;
@@ -19,6 +21,7 @@ interface ChefContextType {
   redirect: string | null;
   initializing: boolean;
   setInitializing: Dispatch<SetStateAction<boolean>>;
+  logOut: () => void;
 }
 
 const AuthContext = createContext<ChefContextType | null>(null);
@@ -28,34 +31,51 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [redirect, setRedirect] = useState<string | null>(null);
   const [chefAuth, setChefAuth] = useState<(User & Chef) | null>(null);
   const [initializing, setInitializing] = useState(true);
+  const { getUser } = useFireBase();
   const auth = getAuth();
-  // useEffect(() => {
-  //   setInitializing(true);
-  //   (async () => {
 
-  //   })();
-  // }, [auth]);
-  onAuthStateChanged(auth, (user) => {
-    setInitializing(false);
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
+  const logOut = () => {
+    signOut(auth);
+  };
 
-      const uid = user.uid;
-      const cookieUserDetails = Cookies.get("chef")
-        ? JSON.parse(Cookies.get("chef")!!)
-        : null;
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setInitializing(false);
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
 
-      if (cookieUserDetails) {
-        setChefAuth({ ...user, ...cookieUserDetails });
+        const uid = user.uid;
+
+        const userSnap = await getUser(uid);
+
+        if (userSnap.exists()) {
+          console.log("Document data:", userSnap.data());
+          setChefAuth({ ...user, ...userSnap.data() });
+          if (!user.emailVerified) {
+            return router.push("/auth/chef/verify");
+          }
+          if (!userSnap.data().isOnboarded) {
+            return router.push("/chefs/onboarding");
+          }
+          router.push("/chefs/admin/meals");
+        } else {
+          // doc.data() will be undefined in this case
+
+          console.log("No such document!");
+        }
+
+        // ...
+      } else {
+        setChefAuth(null);
+        router.push("/auth/chef/signin");
+        // User is signed out
+        // ...
       }
+    });
+    return unsubscribe;
+  }, [auth]);
 
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
   return (
     <AuthContext.Provider
       value={{
@@ -65,6 +85,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         redirect,
         initializing,
         setInitializing,
+        logOut,
       }}
     >
       {children}

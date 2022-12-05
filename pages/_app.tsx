@@ -12,21 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <DataProvider>
       {/* if requireAuth property is present - protect the page */}
-      {Component.requireAuth ? (
-        <AppLayout>
-          <AuthGuard>
-            <Component {...pageProps} />
-          </AuthGuard>
 
-          <ToastContainer />
-        </AppLayout>
-      ) : (
-        // public page
-        <AppLayout>
-          <Component {...pageProps} />
-          <ToastContainer />
-        </AppLayout>
-      )}
+      <AppLayout>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </AppLayout>
     </DataProvider>
   );
 }

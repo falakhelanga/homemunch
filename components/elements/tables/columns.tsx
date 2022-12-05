@@ -72,6 +72,10 @@ export const useCompaniesColumns = () => {
         Header: "Date Created",
         id: "dateCreated",
         accessor: "dateCreated",
+        Cell: (props: any) => {
+          console.log(props?.value.toDate(), "props");
+          return new Date(props?.value.toDate()).toDateString();
+        },
       },
       {
         Header: "Name",
@@ -81,7 +85,7 @@ export const useCompaniesColumns = () => {
       {
         Header: "Quantity ",
         id: "quantity",
-        accessor: "quantity",
+        accessor: "qty",
       },
       {
         Header: "Price ",
@@ -89,9 +93,28 @@ export const useCompaniesColumns = () => {
         accessor: "price",
       },
       {
+        Header: "Description",
+        id: "description",
+        accessor: "description",
+      },
+      {
+        Header: "Item Availability",
+        id: "availability",
+        accessor: "availability",
+        Cell: (props) => {
+          const text = props.value
+            .map((curr: { label: any }) => curr.label)
+            .join(", ");
+          return text;
+        },
+      },
+      {
         Header: "Ratings",
         id: "ratings",
         accessor: "ratings",
+        Cell: () => {
+          return "-";
+        },
       },
 
       // {

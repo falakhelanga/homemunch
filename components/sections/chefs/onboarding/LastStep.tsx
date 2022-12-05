@@ -16,7 +16,7 @@ const LastStep = ({ nextStep }: { nextStep: () => void }) => {
 
     try {
       await addUserInfo({ isOnboarded: true }, chefAuth?.uid);
-      router.replace("/chefs");
+      router.replace("/chefs/admin/meals");
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {

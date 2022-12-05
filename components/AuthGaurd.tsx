@@ -9,16 +9,24 @@ export function AuthGuard({ children }: { children: JSX.Element }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!initializing) {
-      //auth is initialized and there is no user
+    let mounted = true;
+    if (mounted) {
+      if (!initializing) {
+        //auth is initialized and there is no user
 
-      if (!chefAuth) {
-        // remember the page that user tried to access
-        setRedirect(router.route);
-        // redirect
-        router.push("/auth/chef/signin");
+        if (!chefAuth) {
+          // remember the page that user tried to access
+          setRedirect(router.route);
+          // redirect
+          router.push("/auth/chef/signin");
+        } else {
+          router.push("/chefs/admin/meals");
+        }
       }
     }
+    return () => {
+      mounted = false;
+    };
   }, [initializing, chefAuth, setRedirect]);
   // useEffect(() => {
   //   console.log(chefAuth?.isOnboarded, "hsh");

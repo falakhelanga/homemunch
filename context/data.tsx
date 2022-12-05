@@ -5,9 +5,9 @@ import FireBaseProvider from "./firebase";
 const DataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <AuthProvider>
-        <FireBaseProvider>{children}</FireBaseProvider>
-      </AuthProvider>
+      <FireBaseProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </FireBaseProvider>
     </>
   );
 };

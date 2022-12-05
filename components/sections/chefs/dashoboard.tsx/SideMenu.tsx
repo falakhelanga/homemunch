@@ -12,15 +12,15 @@ const items: MenuItemPropType[] = [
   // },
   {
     text: "Meals",
-    link: "/chefs/meals",
+    link: "/chefs/admin/meals",
   },
   {
     text: "Orders",
-    link: "/chefs/orders",
+    link: "/chefs/admin/orders",
   },
   {
     text: "Profile",
-    link: "/chefs/profile",
+    link: "/chefs/admin/profile",
   },
 ];
 
@@ -30,7 +30,7 @@ const SideMenu = () => {
   return (
     <div className="bg-hmRed w-full h-full flex flex-col">
       <div className="flex-1 ">
-        <div className="w-full flex justify-center items-center">
+        <div className="w-full flex justify-center items-center border-b border-white">
           <div className="md:h-[10rem] md:w-[10rem] w-[4rem] h-[4rem] ">
             <img src="/logo.jpeg" alt="logo" className="rounded-full " />
           </div>
@@ -40,7 +40,7 @@ const SideMenu = () => {
           <Link key={idx} href={item.link!!}>
             <MenuItem
               text={item.text}
-              bg={item.link === router.route ? "bg-hmYellow" : ""}
+              bg={router.route.includes(item.link) ? "bg-hmYellow" : ""}
             />
           </Link>
         ))}

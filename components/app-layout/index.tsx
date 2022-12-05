@@ -10,7 +10,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const { chefAuth } = useChefAuth();
   return (
     <div className="relative h-full">
-      {chefAuth && (
+      {router.route.includes("admin") && (
         <div className="h-screen w-full flex items-center ">
           <div className=" flex-[0.3] h-full">
             <SideMenu />
@@ -18,7 +18,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <div className=" flex-[1] h-full">{children}</div>
         </div>
       )}
-      {!chefAuth && (
+      {!router.route.includes("admin") && (
         <>
           {!router.route.includes("chef") && <TopNavBar />}
           <main className=" ">

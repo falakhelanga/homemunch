@@ -89,7 +89,7 @@ const ChefSignInForm = () => {
       //     zipCode: values.homeAdress,
       //   })
       // );
-      router.push("/chefs");
+      router.push("/chefs/admin/meals");
     } catch (error: any) {
       setErrorMessage(error.message);
     } finally {
