@@ -15,7 +15,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           <div className=" flex-[0.3] h-full">
             <SideMenu />
           </div>
-          <div className=" flex-[1] h-full">{children}</div>
+          <div className=" overflow-auto flex-[1] h-full">{children}</div>
         </div>
       )}
       {!router.route.includes("admin") && (
