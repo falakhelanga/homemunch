@@ -10,21 +10,6 @@ const CreateMealPage = () => {
       <div className="px-8 h-[85vh] overflow-auto">
         <CreateMeal />
       </div>
-
-      {/* <CldUploadWidget>
-        {({ cloudinary, widget, open }) => {
-          // UI
-        }}
-      </CldUploadWidget>
-      <CldUploadButton
-        className="bg-hmYellow p-2 rounded "
-        onUpload={(error: any, result: any) => {
-          console.log(result, "result");
-        }}
-        uploadPreset="hm_default"
-      >
-        Upload photo
-      </CldUploadButton> */}
     </div>
   );
 };
