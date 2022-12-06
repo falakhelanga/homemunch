@@ -59,8 +59,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           }
           router.push("/chefs/admin/meals");
         } else {
-          // doc.data() will be undefined in this case
-
           console.log("No such document!");
         }
 
