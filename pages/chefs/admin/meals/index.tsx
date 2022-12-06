@@ -85,7 +85,7 @@ const MealsPage = () => {
       <AdminPageHeader title="Dishes">
         <Button
           onClick={() => {
-            router.push("/chefs/admin/meals/createmeal");
+            router.push("/chefs/admin/createmeal");
           }}
           variant="secondary"
           className=""

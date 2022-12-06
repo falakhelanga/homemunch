@@ -1,7 +1,7 @@
 import React from "react";
-import AdminPageHeader from "../../../../../components/elements/AdminPageHeader";
+import AdminPageHeader from "../../../../components/elements/AdminPageHeader";
 
-import CreateMeal from "../../../../../components/sections/chefs/meals/CreateMeal";
+import CreateMeal from "../../../../components/sections/chefs/meals/CreateMeal";
 
 const CreateMealPage = () => {
   return (
