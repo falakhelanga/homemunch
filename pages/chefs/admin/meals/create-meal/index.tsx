@@ -7,7 +7,7 @@ const CreateMealPage = () => {
   return (
     <div>
       <AdminPageHeader withBack title="Create Dish" />
-      <div className="px-8 h-[85vh] overflow-auto">
+      <div className="px-[6rem] h-[85vh] overflow-auto">
         <CreateMeal />
       </div>
     </div>

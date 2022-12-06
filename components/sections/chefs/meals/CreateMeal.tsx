@@ -15,20 +15,21 @@ import { useRouter } from "next/router";
 const fields = [
   {
     name: "name",
-
+    label: "Dish Name",
     type: "text",
     className: "col-span-1",
     placeholder: "Enter your meal name",
   },
   {
     name: "price",
-
+    label: "Dish Price",
     type: "number",
     className: "col-span-1",
     placeholder: "Enter your dish price",
   },
   {
     name: "description",
+    label: "Dish Description",
     rows: "6",
     type: "text-area",
     className: "col-span-2",
@@ -36,14 +37,14 @@ const fields = [
   },
   {
     name: "qty",
-
+    label: "Dish Quantity",
     type: "number",
     className: "col-span-1",
     placeholder: "Quantity of you dish",
   },
   {
     name: "availability",
-
+    label: "Dish Availability",
     type: "select",
     className: "col-span-1",
     placeholder: "Item days of week availability",

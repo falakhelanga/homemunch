@@ -50,7 +50,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const userSnap = await getUser(uid);
 
         if (userSnap.exists()) {
-          console.log("Document data:", userSnap.data());
           setChefAuth({ ...user, ...userSnap.data() });
           if (!user.emailVerified) {
             return router.push("/auth/chef/verify");
@@ -68,7 +67,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // ...
       } else {
         setChefAuth(null);
-        router.push("/auth/chef/signin");
+        if (router.route.includes("admin")) {
+          return router.push("/auth/chef/signin");
+        }
+
         // User is signed out
         // ...
       }
