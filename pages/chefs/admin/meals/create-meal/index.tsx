@@ -1,6 +1,6 @@
 import React from "react";
 import AdminPageHeader from "../../../../../components/elements/AdminPageHeader";
-import { CldImage, CldUploadButton, CldUploadWidget } from "next-cloudinary";
+
 import CreateMeal from "../../../../../components/sections/chefs/meals/CreateMeal";
 
 const CreateMealPage = () => {
