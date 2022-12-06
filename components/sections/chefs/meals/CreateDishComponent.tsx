@@ -60,7 +60,7 @@ const Availabilityoptions = [
   { value: "friday", label: "Friday" },
   { value: "saturday", label: "Saturday" },
 ];
-const CreateMeal = () => {
+const CreateDishComponent = () => {
   const router = useRouter();
   const initialValues = useMemo(
     () => ({
@@ -164,4 +164,4 @@ const CreateMeal = () => {
   );
 };
 
-export default CreateMeal;
+export default CreateDishComponent;
