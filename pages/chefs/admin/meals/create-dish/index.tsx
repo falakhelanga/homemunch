@@ -5,7 +5,7 @@ import CreateMeal from "../../../../../components/sections/chefs/meals/CreateDis
 const createDish = () => {
   return (
     <div>
-      {/* <AdminPageHeader withBack title="Create Dish" /> */}
+      <AdminPageHeader withBack title="Create Dish" />
       <div className="px-[6rem] h-[85vh] overflow-auto">
         <CreateMeal />
       </div>
