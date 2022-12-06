@@ -85,7 +85,7 @@ const MealsPage = () => {
       <AdminPageHeader title="Dishes">
         <Button
           onClick={() => {
-            router.push("/chefs/admin/createmeal");
+            router.push("/chefs/admin/meals/create-dish");
           }}
           variant="secondary"
           className=""
@@ -108,5 +108,4 @@ const MealsPage = () => {
   );
 };
 
-MealsPage.requireAuth = true;
 export default MealsPage;

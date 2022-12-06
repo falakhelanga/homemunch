@@ -16,5 +16,4 @@ const Chefs = () => {
   );
 };
 
-Chefs.requireAuth = true;
 export default Chefs;

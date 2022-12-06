@@ -10,4 +10,3 @@ const OnboardingPage = () => {
 };
 
 export default OnboardingPage;
-OnboardingPage.requireAuth = true;
