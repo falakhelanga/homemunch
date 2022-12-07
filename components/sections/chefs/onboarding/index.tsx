@@ -75,7 +75,7 @@ const Onboarding = () => {
         </h1>
         <Stepper
           steps={steps.map((step) => step.stepText)}
-          currentStep={currStep}
+          currentStep={currStep - 1}
         />
         {/* <StepsDisplay steps={steps} currStep={currStep} /> */}
         <div className="mt-8 ">
