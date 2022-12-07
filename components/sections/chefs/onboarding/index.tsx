@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import Body from "../../../elements/Body";
+import Stepper from "../../../elements/Stepper";
 import LastStep from "./LastStep";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -58,14 +59,31 @@ const Onboarding = () => {
     }
   }, [currStep]);
   return (
-    <div className="h-screen w-full items-center justify-center flex flex-col">
-      <h1 className="text-4xl mb-8">{title}</h1>
-      <StepsDisplay steps={steps} currStep={currStep} />
-      <div className="mt-8 w-[50%]">
-        {currStep === 1 && <Step1 nextStep={nextStep} />}
-        {currStep === 2 && <Step2 nextStep={nextStep} />}
-        {currStep === 3 && <Step3 nextStep={nextStep} />}
-        {currStep === 4 && <LastStep nextStep={nextStep} />}
+    <div>
+      <div className="flex justify-center my-16">
+        <div className="md:h-[8rem] md:w-[8rem] w-[4rem] h-[4rem] ">
+          <img src="/logo.jpeg" alt="logo" className="rounded-full " />
+        </div>
+      </div>
+
+      <div
+        style={{ maxWidth: "960px", margin: "auto", padding: "1px 0" }}
+        className=""
+      >
+        <h1 className="text-4xl mb-8 text-center capitalize font-semibold">
+          {title}
+        </h1>
+        <Stepper
+          steps={steps.map((step) => step.stepText)}
+          currentStep={currStep}
+        />
+        {/* <StepsDisplay steps={steps} currStep={currStep} /> */}
+        <div className="mt-8 ">
+          {currStep === 1 && <Step1 nextStep={nextStep} />}
+          {currStep === 2 && <Step2 nextStep={nextStep} />}
+          {currStep === 3 && <Step3 nextStep={nextStep} />}
+          {currStep === 4 && <LastStep nextStep={nextStep} />}
+        </div>
       </div>
     </div>
   );

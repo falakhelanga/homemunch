@@ -151,10 +151,10 @@ const CreateDishComponent = () => {
               </>
             );
           })}
-          {/* <ImageUpload
+          <ImageUpload
             name="dishImage"
             btnText="      Upload photo of your dish"
-          /> */}
+          />
         </div>
         <Button type="submit" className="mt-8 text-white">
           {loading ? "Creating Dish..." : "Create Dish"}
