@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import ErrorBlock from "../../../../elements/ErrorBlock";
 import { useChefAuth } from "../../../../../context/chefs/auth";
 import Cookies from "js-cookie";
+import LocationInput from "../../../../elements/LocationInput";
 
 const fields = [
   {
@@ -47,7 +48,7 @@ const fields = [
   {
     name: "homeAdress",
 
-    type: "text",
+    type: "location",
     className: "col-span-2 mt-2",
     placeholder: "Enter your zipcode",
   },
@@ -106,16 +107,16 @@ const ChefSignUpForm = () => {
         phoneNumber: values.phoneNumber,
         zipCode: values.homeAdress,
       });
-      Cookies.set(
-        "chef",
-        JSON.stringify({
-          firstName: values.firstName,
-          lastName: values.lastName,
-          email: values.emailAdress,
-          phoneNumber: values.phoneNumber,
-          zipCode: values.homeAdress,
-        })
-      );
+      // Cookies.set(
+      //   "chef",
+      //   JSON.stringify({
+      //     firstName: values.firstName,
+      //     lastName: values.lastName,
+      //     email: values.emailAdress,
+      //     phoneNumber: values.phoneNumber,
+      //     zipCode: values.homeAdress,
+      //   })
+      // );
       router.push("/chefs/onboarding");
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -140,19 +141,27 @@ const ChefSignUpForm = () => {
         onSubmit={handleSubmit}
       >
         <ErrorBlock error={errorMessage} className="mb-6" />
-        <div className="grid grid-cols-2 w-full gap-2">
+        <div className="grid grid-cols-2 w-full gap-4">
           {fields.map((field, idx) => {
             return (
               <>
-                {field.type !== "phone" ? (
+                {(field.type === "text" || field.type === "password") && (
                   <TextInput
-                    key={idx}
+                    key={field.name}
                     containerClassNames={field.className}
                     {...field}
                   />
-                ) : (
+                )}
+                {field.type === "location" && (
+                  <LocationInput
+                    key={field.name}
+                    containerClassNames={field.className}
+                    {...field}
+                  />
+                )}
+                {field.type === "phone" && (
                   <PhoneInput
-                    key={idx}
+                    key={field.name}
                     containerClassNames={field.className}
                     {...field}
                   />

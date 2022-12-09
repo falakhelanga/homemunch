@@ -44,29 +44,42 @@ const SelectInput = ({
             container: (styles) => ({
               ...styles,
               height: "100%",
+              backgroundColor: "transparent",
+              outline: "none",
+              border: "none",
             }),
             control: (styles) => ({
               ...styles,
-
+              backgroundColor: "transparent",
               padding: "0.3rem 0",
-              border: "none",
+
+              borderBottom: "1px solid rgb(209 213 219)",
+              borderTop: "none",
+              borderRight: "none",
+              borderLeft: "none",
+              borderRadius: "none",
+              outline: "none",
             }),
           }}
           defaultValue={defaultValue}
           onChange={(value) => {
             console.log(value, "values");
-            helpers.setValue(value);
+            helpers.setValue(
+              Array.isArray(value)
+                ? value.map((item) => item.value)
+                : value.value
+            );
           }}
           isMulti={isMulti}
           options={options}
           className="basic-multi-select"
           classNamePrefix="select"
           name={name}
-          value={value}
+          // value={value}
         />
 
         {meta.touched && meta.error && (
-          <div className="text-red-600 text-sm p-2  bg-opacity-10">
+          <div className="text-red-600 text-sm p-2  bg-opacity-10 mt-[-1.2rem]">
             {meta.error}
           </div>
         )}

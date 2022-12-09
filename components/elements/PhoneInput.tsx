@@ -35,7 +35,7 @@ const PhoneInput = ({
         <PhoneInputComponent
           {...field}
           specialLabel=""
-          inputClass={`outline-none w-full rounded-lg bg-white py-3 px-2 ${inputClassNames}`}
+          inputClass={`outline-none w-full bg-transparent border-b border-gray-300  py-3 px-2 ${inputClassNames}`}
           inputStyle={{ width: "100%" }}
           enableSearch
           inputProps={{

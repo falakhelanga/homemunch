@@ -5,4 +5,5 @@ export interface Chef {
   phoneNumber: string;
   zipCode: string;
   isOnboarded?: boolean;
+  profileImage?: string;
 }

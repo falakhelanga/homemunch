@@ -12,11 +12,11 @@ const AdminPageHeader = ({
 }) => {
   const router = useRouter();
   return (
-    <div className="flex bg-white items-stretch h-[12vh] mb-4 ">
+    <div className="flex  items-stretch  my-4 ">
       {withBack && (
         <div
           onClick={() => router.back()}
-          className="bg-[#d8d8d8] h-full px-4 flex justify-center items-center"
+          className=" h-full px-4 flex justify-center items-center"
         >
           <IoIosArrowBack size={32} />
         </div>

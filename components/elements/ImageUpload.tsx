@@ -18,8 +18,11 @@ const ImageUpload = ({
   const [uploadedImage, setUploadedImage] = useState(null);
   const [uploadedProgress, setUploadedProgress] = useState(0);
   const [file, setFile] = useState(null);
+  const [field, meta, helpers] = useField(name);
+  const { value } = field;
   const handleChange = async (file: any) => {
     const formData = new FormData();
+
     formData.append("file", file[0]);
     formData.append("upload_preset", "hm_default");
 
@@ -34,19 +37,20 @@ const ImageUpload = ({
       }
     );
     setImageUrl(data.url);
+    helpers.setValue(data.url);
     // console.log(data, "file");
     setFile(file);
   };
-  const [field, meta, helpers] = useField(name);
-  const { value } = field;
+
   console.log(uploadedImage, "oploade");
 
   return (
-    <div>
+    <div className="w-full">
       <FileUploader
+        value={value}
         multiple={true}
         handleChange={handleChange}
-        name="file"
+        name={name}
         types={fileTypes}
       >
         <div className="bg-white rounded-md py-6 px-10 ">
@@ -76,6 +80,11 @@ const ImageUpload = ({
           </div>
         </div>
       </FileUploader>
+      {meta.touched && meta.error && (
+        <div className="text-red-600 text-sm p-2  bg-opacity-10">
+          {meta.error}
+        </div>
+      )}
     </div>
 
     // <div>

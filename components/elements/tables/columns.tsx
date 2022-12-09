@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { useRouter } from "next/router";
+import { AiTwotoneEdit } from "react-icons/ai";
 export const useAppUsersColumns = () => {
   const router = useRouter();
   const [allAppUsersSelected, setAllAppUsersSelected] = useState(false);
@@ -69,6 +70,22 @@ export const useCompaniesColumns = () => {
   const columns = useMemo(
     () => [
       {
+        Header: "Image",
+        id: "dishImage",
+        accessor: "imageGallery",
+        Cell: (props: any) => {
+          return (
+            <div className="rounded-md aspect-square overflow-hidden w-[5rem] h-[5rem]">
+              <img
+                className="h-full w-full"
+                src={props.value[0]}
+                alt="dish image"
+              />
+            </div>
+          );
+        },
+      },
+      {
         Header: "Date Created",
         id: "dateCreated",
         accessor: "dateCreated",
@@ -103,7 +120,7 @@ export const useCompaniesColumns = () => {
         accessor: "availability",
         Cell: (props) => {
           const text = props.value
-            .map((curr: { label: any }) => curr.label)
+            .map((curr: { label: any }) => curr)
             .join(", ");
           return text;
         },
@@ -116,32 +133,14 @@ export const useCompaniesColumns = () => {
           return "-";
         },
       },
-
-      // {
-      //   Header: "Products",
-      //   id: "products",
-      //   // accessor: "products",
-      //   disableFilters: true,
-      //   Cell: () => {
-
-      //      return <span className="bg-lightblue px-2 rounded-full text-white">
-      //         SP
-      //       </span>
-      //     // ) : (
-      //     //   <span className="bg-darkblue px-2 rounded-full text-white">
-      //     //     AHDX
-      //     //   </span>
-      //     // );
-      //   },
-      // },
-
-      // {
-      //   Header: "allocated profiles",
-      //   id: "allocated_profiles",
-      //   accessor: "allocated_profiles",
-      //   Cell: ({ value }) => <div className="flex justify-center">{value}</div>,
-      //   disableFilters: true,
-      // },
+      {
+        Header: "Edit",
+        id: "edit",
+        // accessor: "ratings",
+        Cell: () => {
+          return <AiTwotoneEdit size={20} />;
+        },
+      },
     ],
     []
   );

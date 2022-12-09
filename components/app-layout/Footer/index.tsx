@@ -12,9 +12,27 @@ const Footer = () => {
             copyright <span className="">&copy;</span> 2022 Home munch
           </div>
           <div className="flex gap-4 my-4 md:my-0">
-            <FaFacebookSquare color="black" size={23} />
-            <FaTwitterSquare color="black" size={23} />
-            <FaInstagram color="black" size={23} />
+            <a
+              href="https://www.facebook.com/profile.php?id=100087603346622"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaFacebookSquare color="black" size={23} />
+            </a>
+            <a
+              href="https://twitter.com/HomeMunchUK"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaTwitterSquare color="black" size={23} />
+            </a>
+            <a
+              href="https://www.instagram.com/homemunch/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaInstagram color="black" size={23} />
+            </a>
           </div>
         </div>
       </Body>

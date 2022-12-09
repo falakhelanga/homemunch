@@ -33,7 +33,7 @@ const LastStep = ({ nextStep }: { nextStep: () => void }) => {
             className="font-normal"
             variant="outline"
           >
-            Go To Dashboard
+            Done
           </Button>
         </div>
       </div>

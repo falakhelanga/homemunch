@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ErrorBlock from "../../../elements/ErrorBlock";
 import Form from "../../../elements/Form";
 import PhoneInput from "../../../elements/PhoneInput";
@@ -12,6 +12,52 @@ import { useFireBase } from "../../../../context/firebase";
 import { useChefAuth } from "../../../../context/chefs/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { createMealValidationSchema } from "./createMealValidationSchema";
+const Availabilityoptions = [
+  { value: "sunday", label: "Sunday" },
+  { value: "monday", label: "Monday" },
+
+  { value: "tuesday", label: "Tuesday" },
+  { value: "wednesday", label: "Wednesday" },
+  { value: "thursday", label: "Thursday" },
+  { value: "friday", label: "Friday" },
+  { value: "saturday", label: "Saturday" },
+];
+
+const cuisineOptions = [
+  {
+    value: "Asian",
+    label: "Asian Cuisine",
+  },
+  {
+    value: "African",
+    label: "African Cuisine",
+  },
+  {
+    value: "European",
+    label: "European Cuisine",
+  },
+  {
+    value: "American",
+    label: "Cuisine of the Americas",
+  },
+];
+
+const dishTypeOption = [
+  {
+    value: "break fast",
+    label: "Break Fast",
+  },
+  {
+    value: "lunch",
+    label: "Lunch",
+  },
+  {
+    value: "dinner",
+    label: "Dinner",
+  },
+];
+
 const fields = [
   {
     name: "name",
@@ -48,18 +94,27 @@ const fields = [
     type: "select",
     className: "col-span-1",
     placeholder: "Item days of week availability",
+    options: Availabilityoptions,
+    isMulti: true,
+  },
+  {
+    name: "cuisineType",
+    label: "Cuisine type",
+    type: "select",
+    className: "col-span-1",
+    placeholder: "please select type of cuisine for this dish",
+    options: cuisineOptions,
+  },
+  {
+    name: "dishType",
+    label: "Dish type",
+    type: "select",
+    className: "col-span-1",
+    placeholder: "please select your dish type",
+    options: dishTypeOption,
   },
 ];
-const Availabilityoptions = [
-  { value: "sunday", label: "Sunday" },
-  { value: "monday", label: "Monday" },
 
-  { value: "tuesday", label: "Tuesday" },
-  { value: "wednesday", label: "Wednesday" },
-  { value: "thursday", label: "Thursday" },
-  { value: "friday", label: "Friday" },
-  { value: "saturday", label: "Saturday" },
-];
 const CreateDishComponent = () => {
   const router = useRouter();
   const initialValues = useMemo(
@@ -68,8 +123,10 @@ const CreateDishComponent = () => {
       description: "",
       price: 0,
       qty: 0,
-      availabilty: "",
+      availability: "",
       dishImage: "",
+      cuisineType: "",
+      dishType: "",
     }),
     []
   );
@@ -77,16 +134,44 @@ const CreateDishComponent = () => {
   const [loading, setLoading] = useState(false);
   const { createDish } = useFireBase();
   const { chefAuth } = useChefAuth();
-
+  const [imageUrl, setImageUrl] = useState(null);
+  const [dishImages, setDishImages] = useState([]);
+  useEffect(() => {
+    if (imageUrl) {
+      setDishImages((currState) => {
+        let newState: any = [...currState];
+        newState.push(imageUrl);
+        return newState;
+      });
+    }
+  }, [imageUrl]);
   const onSubmit = async (values: any) => {
     console.log(values, "values");
     setLoading(true);
+    const {
+      name,
+      description,
+      price,
+      qty,
+      availability,
+      dishImage,
+      cuisineType,
+      dishType,
+    } = values;
     try {
       const docRef = await createDish({
-        ...values,
+        name,
+        description,
+        price,
+        qty,
+        availability,
+
+        cuisineType,
+        dishType,
+        imageGallery: dishImages,
         chefLink: `${chefAuth?.uid}__${chefAuth?.firstName} ${chefAuth?.firstName}`,
       });
-      toast.success("Dish createf successfully");
+      toast.success("Dish created successfully");
       router.back();
       console.log(docRef);
     } catch (error: any) {
@@ -99,9 +184,13 @@ const CreateDishComponent = () => {
   };
   return (
     <div className=" overflow-auto">
-      <Form onSubmit={onSubmit} initialValues={initialValues}>
+      <Form
+        validationSchema={createMealValidationSchema}
+        onSubmit={onSubmit}
+        initialValues={initialValues}
+      >
         <ErrorBlock error={errorMessage} className="mb-6" />
-        <div className="grid grid-cols-2 w-full gap-2">
+        <div className="grid grid-cols-2 w-full gap-6">
           {fields.map((field, idx) => {
             return (
               <>
@@ -128,9 +217,7 @@ const CreateDishComponent = () => {
                 )}
                 {field.type === "select" && (
                   <SelectInput
-                    isMulti
                     key={idx}
-                    options={Availabilityoptions}
                     containerClassNames={field.className}
                     {...field}
                   />
@@ -151,10 +238,30 @@ const CreateDishComponent = () => {
               </>
             );
           })}
-          <ImageUpload
-            name="dishImage"
-            btnText="      Upload photo of your dish"
-          />
+          <div className="col-span-2">
+            <ImageUpload
+              setImageUrl={setImageUrl}
+              name="dishImage"
+              btnText="      Upload photo of your dish"
+            />
+          </div>
+          <div className="col-span-2 grid grid-cols-6 gap-2">
+            {dishImages.length > 0 &&
+              dishImages.map((dishImage, idx) => {
+                return (
+                  <div
+                    className="w-[10rem] aspect-square rounded-md overflow-hidden"
+                    key={idx}
+                  >
+                    <img
+                      className="h-full w-full"
+                      src={dishImage}
+                      alt="dish image"
+                    />
+                  </div>
+                );
+              })}
+          </div>
         </div>
         <Button type="submit" className="mt-8 text-white">
           {loading ? "Creating Dish..." : "Create Dish"}
