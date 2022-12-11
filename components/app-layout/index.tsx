@@ -4,6 +4,7 @@ import { useChefAuth } from "../../context/chefs/auth";
 import SideMenu from "../sections/chefs/dashoboard.tsx/SideMenu";
 import UserInfoNav from "../sections/chefs/dashoboard.tsx/UserInfoNav";
 import Footer from "./Footer";
+import MenuDrawer from "./menu-drawer";
 import TopNavBar from "./TopNavBar";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
@@ -24,6 +25,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
       )}
       {!router.route.includes("admin") && (
         <>
+          <MenuDrawer />
           {!router.route.includes("chef") && <TopNavBar />}
           <main className=" ">
             <div>{children}</div>
