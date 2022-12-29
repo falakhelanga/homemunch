@@ -106,6 +106,7 @@ const ChefSignUpForm = () => {
         email: values.emailAdress,
         phoneNumber: values.phoneNumber,
         zipCode: values.homeAdress,
+        rates: 0,
       });
       // Cookies.set(
       //   "chef",

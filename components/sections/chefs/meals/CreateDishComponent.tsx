@@ -136,6 +136,7 @@ const CreateDishComponent = () => {
   const { chefAuth } = useChefAuth();
   const [imageUrl, setImageUrl] = useState(null);
   const [dishImages, setDishImages] = useState([]);
+
   useEffect(() => {
     if (imageUrl) {
       setDishImages((currState) => {
@@ -170,6 +171,12 @@ const CreateDishComponent = () => {
         dishType,
         imageGallery: dishImages,
         chefLink: `${chefAuth?.uid}__${chefAuth?.firstName} ${chefAuth?.firstName}`,
+        chefObj: {
+          name: `${chefAuth?.firstName} ${chefAuth?.lastName}`,
+          location: chefAuth?.zipCode,
+          image: chefAuth?.profileImage || null,
+          phoneNumber: chefAuth?.phoneNumber,
+        },
       });
       toast.success("Dish created successfully");
       router.back();
