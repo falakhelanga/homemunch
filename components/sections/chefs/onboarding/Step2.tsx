@@ -135,7 +135,7 @@ const Step2 = ({ nextStep }: { nextStep: () => void }) => {
         </div>
         <div>
           <div className="mt-6 ">
-            <Button type="submit" className="font-normal" variant="outline">
+            <Button type="submit" className="font-bold" variant="secondary">
               {!loading ? " Continue" : "Submitting..."}
             </Button>
           </div>

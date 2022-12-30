@@ -47,6 +47,12 @@ export const functions = {
       dateUpdated: Timestamp.now(),
     });
   },
+  addChefDish: (values: any, userId: any) => {
+    return addDoc(collection(db, "chefs", userId, "dishes"), {
+      ...values,
+      dateUpdated: Timestamp.now(),
+    });
+  },
   getUser: (userId: string) => {
     const userRef = doc(db, "chefs", userId);
     return getDoc(userRef);

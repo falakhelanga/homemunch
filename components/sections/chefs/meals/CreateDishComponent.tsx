@@ -132,7 +132,7 @@ const CreateDishComponent = () => {
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const { createDish } = useFireBase();
+  const { createDish, addChefDish } = useFireBase();
   const { chefAuth } = useChefAuth();
   const [imageUrl, setImageUrl] = useState(null);
   const [dishImages, setDishImages] = useState([]);
@@ -160,24 +160,45 @@ const CreateDishComponent = () => {
       dishType,
     } = values;
     try {
-      const docRef = await createDish({
-        name,
-        description,
-        price,
-        qty,
-        availability,
+      // const docRef = await createDish({
+      //   name,
+      //   description,
+      //   price,
+      //   qty,
+      //   availability,
 
-        cuisineType,
-        dishType,
-        imageGallery: dishImages,
-        chefLink: `${chefAuth?.uid}__${chefAuth?.firstName} ${chefAuth?.firstName}`,
-        chefObj: {
-          name: `${chefAuth?.firstName} ${chefAuth?.lastName}`,
-          location: chefAuth?.zipCode,
-          image: chefAuth?.profileImage || null,
-          phoneNumber: chefAuth?.phoneNumber,
+      //   cuisineType,
+      //   dishType,
+      //   imageGallery: dishImages,
+      //   chefLink: `${chefAuth?.uid}__${chefAuth?.firstName} ${chefAuth?.firstName}`,
+      //   chefObj: {
+      //     name: `${chefAuth?.firstName} ${chefAuth?.lastName}`,
+      //     location: chefAuth?.zipCode,
+      //     image: chefAuth?.profileImage || null,
+      //     phoneNumber: chefAuth?.phoneNumber,
+      //   },
+      // });
+      const docRef = await addChefDish(
+        {
+          name,
+          description,
+          price,
+          qty,
+          availability,
+
+          cuisineType,
+          dishType,
+          imageGallery: dishImages,
+          chefLink: `${chefAuth?.uid}__${chefAuth?.firstName} ${chefAuth?.firstName}`,
+          chefObj: {
+            name: `${chefAuth?.firstName} ${chefAuth?.lastName}`,
+            location: chefAuth?.zipCode,
+            image: chefAuth?.profileImage || null,
+            phoneNumber: chefAuth?.phoneNumber,
+          },
         },
-      });
+        chefAuth?.uid
+      );
       toast.success("Dish created successfully");
       router.back();
       console.log(docRef);
@@ -249,7 +270,7 @@ const CreateDishComponent = () => {
             <ImageUpload
               setImageUrl={setImageUrl}
               name="dishImage"
-              btnText="      Upload photo of your dish"
+              btnText="      Upload photos of your dish"
             />
           </div>
           <div className="col-span-2 grid grid-cols-6 gap-2">

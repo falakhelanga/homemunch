@@ -7,6 +7,7 @@ import Form from "../../../elements/Form";
 import PhoneInput from "../../../elements/PhoneInput";
 import TextInput from "../../../elements/TextInput";
 import { chefUpdateValidationSchema } from "./validationSchame";
+import ImageUpload from "../../../elements/ImageUpload";
 
 const fields = [
   {
@@ -49,7 +50,8 @@ const fields = [
 const Step1 = ({ nextStep }: { nextStep: () => void }) => {
   const [loading, setLoading] = useState(false);
   const { chefAuth } = useChefAuth();
-
+  const [profileImage, setProfileImage] = useState(null);
+  const [backgroundImage, setBackgroundImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { addUserInfo } = useFireBase();
   const initialValues = useMemo(
@@ -59,18 +61,17 @@ const Step1 = ({ nextStep }: { nextStep: () => void }) => {
       emailAdress: chefAuth?.email,
       phoneNumber: chefAuth?.phoneNumber,
       homeAdress: chefAuth?.zipCode,
+      profileImage: "",
+      backgroundImage: "",
     }),
     [chefAuth]
   );
   const handleSubmit = async (values: any) => {
     setLoading(true);
-    const { lastName, firstName, emailAdress, phoneNumber, homeAdress } =
-      values;
+    // const { lastName, firstName, emailAdress, phoneNumber, homeAdress,  profileImage ,  backgroundImage} =
+    //   values;
     try {
-      await addUserInfo(
-        { lastName, firstName, emailAdress, phoneNumber, homeAdress },
-        chefAuth?.uid
-      );
+      await addUserInfo(values, chefAuth?.uid);
       nextStep();
     } catch (error: any) {
       setErrorMessage(error.message);
@@ -107,10 +108,25 @@ const Step1 = ({ nextStep }: { nextStep: () => void }) => {
               </>
             );
           })}
+
+          <div className="col-span-2 mt-4">
+            <ImageUpload
+              setImageUrl={setProfileImage}
+              btnText="Upload Your Profile Image"
+              name="profileImage"
+            />
+          </div>
+          <div className="col-span-2 mt-4">
+            <ImageUpload
+              setImageUrl={setBackgroundImage}
+              btnText="Upload Your Background Image"
+              name="backgroundImage"
+            />
+          </div>
         </div>
         <div>
-          <div className="mt-6 ">
-            <Button type="submit" className="font-normal" variant="outline">
+          <div className="my-6 ">
+            <Button type="submit" className="font-bold" variant="secondary">
               {!loading ? " Continue" : "Submitting..."}
             </Button>
           </div>

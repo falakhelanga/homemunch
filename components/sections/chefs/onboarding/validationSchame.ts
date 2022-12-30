@@ -19,4 +19,5 @@ export const chefUpdateValidationSchema = Yup.object().shape({
     )
     .required("Please enter your phone number."),
   homeAdress: Yup.string().required("Please enter your home address."),
+  profileImage: Yup.string().required("Please upload your profile image"),
 });

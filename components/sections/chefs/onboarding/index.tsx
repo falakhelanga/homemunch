@@ -27,7 +27,7 @@ const steps: StepPropsType[] = [
     isActive: false,
     isLast: false,
     step: 3,
-    stepText: "Profile Info",
+    stepText: "Kitchen info",
     isComplete: false,
   },
   {
@@ -51,7 +51,7 @@ const Onboarding = () => {
       case 2:
         return "Food Safety";
       case 3:
-        return "Profile info";
+        return "Kitchen info";
       case 4:
         return "Welcome to Home munch";
       default:

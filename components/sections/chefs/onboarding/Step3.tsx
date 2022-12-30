@@ -4,7 +4,9 @@ import { useFireBase } from "../../../../context/firebase";
 import Button from "../../../elements/Button";
 import Form from "../../../elements/Form";
 import ImageUpload from "../../../elements/ImageUpload";
-
+import TextInput from "../../../elements/TextInput";
+import TextAreaInput from "../../../elements/TextAreaInput";
+import * as Yup from "yup";
 const Step3 = ({ nextStep }: { nextStep: () => void }) => {
   const [loading, setLoading] = useState(false);
   const { chefAuth } = useChefAuth();
@@ -13,45 +15,73 @@ const Step3 = ({ nextStep }: { nextStep: () => void }) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { addUserInfo } = useFireBase();
   const handleSubmit = async (values: any) => {
-    setLoading(true);
-    // const { registeredToSellFromHome, foodygieneCertificate } = values;
-    if (profileImage || backgroundImage) {
-      try {
-        await addUserInfo({ profileImage, backgroundImage }, chefAuth?.uid);
-        // nextStep();
-      } catch (error: any) {
-        setErrorMessage(error.message);
-      } finally {
-        setLoading(false);
-      }
-      // return;
-    }
-    nextStep();
-  };
+    console.log("ss");
+    console.log(values, "value");
 
-  console.log(profileImage, "profile image");
-  console.log(backgroundImage, "background image");
+    setLoading(true);
+
+    try {
+      await addUserInfo(values, chefAuth?.uid);
+      nextStep();
+    } catch (error: any) {
+      setErrorMessage(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="mb-6">
-      <Form initialValues={{ image: "" }} onSubmit={handleSubmit}>
-        <div>
-          <ImageUpload
-            setImageUrl={setProfileImage}
-            btnText="Upload Your Profile Image"
-            name="image"
-          />
-        </div>
-        <div className="mt-4">
-          <ImageUpload
-            setImageUrl={setBackgroundImage}
-            btnText="Upload Your Background Image"
-            name="image"
-          />
+      <Form
+        initialValues={{
+          kitchenName: "",
+          kitchenBio: "",
+          kitchenBackgroundImage: "",
+        }}
+        validationSchema={Yup.object().shape({
+          kitchenName: Yup.string()
+            .min(2, "Too Short!")
+            .max(70, "Too Long!")
+            .required("Please enter your kitchen name."),
+          kitchenBio: Yup.string()
+            .min(20, "Too Short!")
+            // .max(70, "Too Long!")
+            .required("Please describe your kitchen."),
+
+          kitchenBackgroundImage: Yup.string().required(
+            "Please upload your kitchen background image"
+          ),
+        })}
+        onSubmit={handleSubmit}
+      >
+        <div className="grid grid-cols-1 w-full gap-6">
+          <div>
+            <TextInput
+              containerClassNames=""
+              type="text"
+              name="kitchenName"
+              placeholder="Please enter your kitchen name"
+            />
+          </div>
+          <div>
+            <TextAreaInput
+              containerClassNames=" "
+              // type="text"
+              name="kitchenBio"
+              placeholder="Please describe your kitchen"
+            />
+          </div>
+          <div className="">
+            <ImageUpload
+              setImageUrl={setBackgroundImage}
+              btnText="Upload Your Kitchen Background Image"
+              name="kitchenBackgroundImage"
+            />
+          </div>
         </div>
 
         <div className="mt-6 ">
-          <Button type="submit" className="font-normal" variant="outline">
+          <Button type="submit" className="font-bold" variant="secondary">
             {!loading ? " Continue" : "Submitting..."}
           </Button>
         </div>

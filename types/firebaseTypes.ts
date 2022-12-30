@@ -20,4 +20,5 @@ export interface FireBaseTypes {
   createDish: (values: any) => Promise<DocumentReference<any>>;
   getDishes: (chefLink: string) => Promise<QuerySnapshot<DocumentData>>;
   signInWithFaceBook: () => Promise<User>;
+  addChefDish: (values: any, userId: any) => Promise<void>;
 }

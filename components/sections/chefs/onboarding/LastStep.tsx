@@ -30,8 +30,8 @@ const LastStep = ({ nextStep }: { nextStep: () => void }) => {
           <Button
             type="button"
             onClick={handleSubmit}
-            className="font-normal"
-            variant="outline"
+            className="font-bold"
+            variant="secondary"
           >
             Done
           </Button>
