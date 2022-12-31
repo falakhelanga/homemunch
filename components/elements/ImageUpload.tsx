@@ -27,7 +27,7 @@ const ImageUpload = ({
     formData.append("upload_preset", "hm_default");
 
     const { data } = await axios.post(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
+      `https://api.cloudinary.com/v1_1/do5z8cakb/upload`,
       formData,
       {
         onUploadProgress: (progressEvent) => {
